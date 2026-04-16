@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ybor Import Co. | Spirits - Provisions - Specialty Foods</title>
+    <meta name="description" content="Ybor Import Co. discovers family-owned producers from around the world and brings their spirits, wines, and specialty foods to Florida. Tampa-based importer and wholesaler.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy: #1B2E4A;
+            --navy-mid: #162842;
+            --navy-dark: #0F1F33;
+            --navy-light: #243B5C;
+            --gold: #C9A84C;
+            --gold-dark: #A8862E;
+            --gold-light: #D4B96A;
+            --cream: #F5F0E1;
+            --cream-dim: #B8B0A0;
+            --rust: #8B5E3C;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        /* Global vintage treatment — all photos sepia B&W */
+        img:not(.hero-logo) {
+            filter: sepia(0.4) saturate(0.3) contrast(1.1) brightness(0.9) !important;
+            transition: filter 0.6s ease;
+        }
+        img:not(.hero-logo):hover {
+            filter: sepia(0.5) saturate(0.2) contrast(1.15) brightness(0.95) !important;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--navy);
+            color: var(--cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            padding: 16px 0; transition: all 0.4s ease;
+            background: var(--navy-dark);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+        }
+        nav.scrolled {
+            background: var(--navy-dark);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.25);
+        }
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto; padding: 0 40px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-brand {
+            font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700;
+            color: var(--gold); letter-spacing: 3px; text-decoration: none;
+        }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+        .nav-links a {
+            color: var(--cream-dim); text-decoration: none; font-size: 13px;
+            font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-portal {
+            padding: 8px 20px; border: 1px solid var(--gold); border-radius: 4px;
+            color: var(--gold) !important; transition: all 0.3s !important;
+        }
+        .nav-portal:hover {
+            background: var(--gold) !important; color: var(--navy) !important;
+        }
+        .hamburger {
+            display: none; flex-direction: column; gap: 5px;
+            cursor: pointer; background: none; border: none; padding: 4px;
+        }
+        .hamburger span { width: 24px; height: 2px; background: var(--gold); }
+
+        /* HERO — full-screen with Ybor City brick background */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            justify-content: center; text-align: center; position: relative;
+        }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background:
+                linear-gradient(to bottom, rgba(27,46,74,0.3) 0%, rgba(27,46,74,0.75) 50%, var(--navy) 100%),
+                url('https://digitalcommons.usf.edu/burgert/1044/preview.jpg') center/cover no-repeat;
+        }
+        .hero-content { position: relative; z-index: 2; padding: 40px; }
+        .hero-logo {
+            width: 200px; height: 200px; border-radius: 24px;
+            margin: 0 auto 40px;
+            box-shadow: 0 0 80px rgba(201,168,76,0.15), 0 20px 60px rgba(0,0,0,0.5);
+            border: 1px solid rgba(201,168,76,0.2);
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 56px); font-weight: 800;
+            color: var(--gold); letter-spacing: 6px; margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+        .hero-tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(18px, 2.5vw, 26px); font-weight: 400;
+            font-style: italic; color: var(--cream); margin-bottom: 12px; opacity: 0.9;
+        }
+        .hero-sub {
+            font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+            color: var(--cream-dim); margin-bottom: 48px;
+        }
+        .hero-cta {
+            display: inline-block; padding: 16px 48px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--navy); font-size: 13px; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+            border-radius: 4px; transition: all 0.3s ease;
+            box-shadow: 0 4px 24px rgba(201,168,76,0.3);
+        }
+        .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,168,76,0.4); }
+        .scroll-hint { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 2; }
+        .scroll-hint span {
+            display: block; width: 1px; height: 60px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            margin: 0 auto; animation: scrollPulse 2s ease-in-out infinite;
+        }
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+            50% { opacity: 1; transform: scaleY(1); }
+        }
+
+        /* DIVIDER */
+        .divider {
+            display: flex; align-items: center; justify-content: center; gap: 20px;
+            padding: 0 40px; max-width: 600px; margin: 0 auto;
+        }
+        .divider::before, .divider::after {
+            content: ''; flex: 1; height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+        }
+        .divider-icon { color: var(--gold); font-size: 14px; opacity: 0.6; }
+
+        /* SECTION LABEL */
+        .section-label {
+            font-size: 11px; font-weight: 600; letter-spacing: 4px;
+            text-transform: uppercase; color: var(--gold); margin-bottom: 24px;
+        }
+
+        /* MISSION */
+        .mission { padding: 120px 40px; max-width: 900px; margin: 0 auto; text-align: center; }
+        .mission h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 3.5vw, 42px); font-weight: 600;
+            color: var(--cream); line-height: 1.3; margin-bottom: 32px;
+        }
+        .mission h2 em { color: var(--gold); font-style: italic; }
+        .mission p {
+            font-size: 17px; color: var(--cream-dim); line-height: 1.8;
+            max-width: 700px; margin: 0 auto;
+        }
+        .mission p + p { margin-top: 20px; }
+
+        /* PHOTO STRIP — three side-by-side images */
+        .photo-strip {
+            display: grid; grid-template-columns: 1fr 1fr 1fr;
+            gap: 0; height: 360px; overflow: hidden;
+        }
+        .photo-strip .strip-img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: saturate(0.7) brightness(0.85);
+            transition: all 0.6s ease;
+        }
+        .photo-strip .strip-img:hover {
+            filter: saturate(1) brightness(1);
+            transform: scale(1.03);
+        }
+
+        /* CATEGORIES */
+        .categories {
+            padding: 100px 40px; background: var(--navy-mid); position: relative;
+        }
+        .categories::before, .categories::after {
+            content: ''; position: absolute; left: 0; right: 0; height: 1px;
+            background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), transparent);
+        }
+        .categories::before { top: 0; }
+        .categories::after { bottom: 0; }
+        .categories-inner { max-width: 1100px; margin: 0 auto; }
+        .categories-header { text-align: center; margin-bottom: 60px; }
+        .categories-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 3vw, 38px); color: var(--cream); margin-bottom: 12px;
+        }
+        .categories-header p { color: var(--cream-dim); font-size: 15px; }
+
+        .categories-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+        }
+
+        .category-card {
+            border-radius: 16px; overflow: hidden; position: relative;
+            min-height: 340px; transition: all 0.4s ease; cursor: default;
+        }
+        .category-card:hover { transform: translateY(-6px); }
+        .category-card:hover .cat-img { transform: scale(1.08); filter: brightness(0.5); }
+
+        .cat-img {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: cover; transition: all 0.6s ease;
+            filter: brightness(0.4) saturate(0.8);
+        }
+        .cat-overlay {
+            position: absolute; inset: 0; z-index: 2;
+            background: linear-gradient(to top, rgba(15,31,51,0.95) 0%, rgba(15,31,51,0.3) 60%, transparent 100%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 28px;
+        }
+        .cat-overlay h3 {
+            font-family: 'Playfair Display', serif; font-size: 22px;
+            color: var(--cream); margin-bottom: 6px;
+        }
+        .cat-overlay p { font-size: 13px; color: var(--cream-dim); line-height: 1.5; }
+        .cat-tag {
+            position: absolute; top: 16px; left: 16px; z-index: 3;
+            font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+            color: var(--gold); background: rgba(27,46,74,0.8);
+            padding: 5px 12px; border-radius: 4px;
+            backdrop-filter: blur(8px); border: 1px solid rgba(201,168,76,0.2);
+        }
+
+        /* STORY */
+        .story { padding: 120px 40px; max-width: 1100px; margin: 0 auto; }
+        .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .story-image {
+            border-radius: 16px; overflow: hidden; position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+        .story-image img {
+            width: 100%; height: 480px; object-fit: cover;
+            filter: sepia(0.3) saturate(0.8) contrast(1.1);
+        }
+
+        /* HISTORIC GALLERY — scrolling archive photos */
+        .archive-gallery {
+            padding: 80px 0; overflow: hidden; position: relative;
+            background: var(--navy-dark);
+        }
+        .archive-gallery::before, .archive-gallery::after {
+            content: ''; position: absolute; left: 0; right: 0; height: 1px;
+            background: linear-gradient(to right, transparent, rgba(201,168,76,0.2), transparent);
+        }
+        .archive-gallery::before { top: 0; }
+        .archive-gallery::after { bottom: 0; }
+        .archive-header {
+            text-align: center; margin-bottom: 40px; padding: 0 40px;
+        }
+        .archive-header h3 {
+            font-family: 'Playfair Display', serif; font-size: 24px;
+            color: var(--cream); margin-bottom: 8px;
+        }
+        .archive-header p { font-size: 13px; color: var(--cream-dim); }
+        .archive-header a {
+            color: var(--gold); text-decoration: none; font-size: 12px;
+            letter-spacing: 1px; border-bottom: 1px solid rgba(201,168,76,0.3);
+            transition: border-color 0.3s;
+        }
+        .archive-header a:hover { border-color: var(--gold); }
+        .archive-scroll {
+            display: flex; gap: 20px; padding: 0 40px;
+            overflow-x: auto; scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch; scrollbar-width: none;
+        }
+        .archive-scroll::-webkit-scrollbar { display: none; }
+        .archive-card {
+            flex: 0 0 280px; scroll-snap-align: start;
+            border-radius: 12px; overflow: hidden; position: relative;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: transform 0.3s;
+        }
+        .archive-card:hover { transform: translateY(-4px); }
+        .archive-card img {
+            width: 100%; height: 220px; object-fit: cover;
+            filter: sepia(0.4) contrast(1.1) brightness(0.9);
+        }
+        .archive-card-info {
+            padding: 14px 16px;
+        }
+        .archive-card-info h4 {
+            font-family: 'Playfair Display', serif; font-size: 14px;
+            color: var(--cream); margin-bottom: 4px; line-height: 1.3;
+        }
+        .archive-card-info span {
+            font-size: 11px; color: var(--gold); letter-spacing: 1px;
+        }
+        .story-image-caption {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 16px 20px;
+            background: linear-gradient(transparent, rgba(15,31,51,0.9));
+            font-size: 11px; color: var(--cream-dim); letter-spacing: 1px;
+        }
+        .story-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 3vw, 38px); color: var(--cream);
+            margin-bottom: 24px; line-height: 1.2;
+        }
+        .story-text h2 span { color: var(--gold); }
+        .story-text p {
+            font-size: 16px; color: var(--cream-dim); line-height: 1.8; margin-bottom: 16px;
+        }
+        .story-quote {
+            margin-top: 32px; background: rgba(255,255,255,0.03);
+            border-left: 3px solid var(--gold); border-radius: 0 12px 12px 0;
+            padding: 24px 28px;
+        }
+        .story-quote blockquote {
+            font-family: 'Playfair Display', serif; font-size: 20px;
+            font-style: italic; color: var(--cream); line-height: 1.5; margin-bottom: 8px;
+        }
+        .story-quote cite {
+            font-family: 'Inter', sans-serif; font-style: normal;
+            font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold);
+        }
+
+        /* FULL-WIDTH PARALLAX BAND */
+        .parallax-band {
+            height: 400px; position: relative; overflow: hidden;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+        }
+        .parallax-band-bg {
+            position: absolute; inset: -20%; width: 140%; height: 140%;
+            background-size: cover; background-position: center;
+            background-attachment: fixed;
+        }
+        .parallax-band-overlay {
+            position: absolute; inset: 0;
+            background: rgba(27,46,74,0.75);
+        }
+        .parallax-band-content {
+            position: relative; z-index: 2; padding: 40px;
+        }
+        .parallax-band h2 {
+            font-family: 'Playfair Display', serif; font-size: clamp(24px, 3vw, 36px);
+            color: var(--cream); margin-bottom: 8px;
+        }
+        .parallax-band p {
+            font-size: 15px; color: var(--cream-dim); max-width: 600px; margin: 0 auto;
+        }
+
+        /* CONTACT */
+        .contact { padding: 100px 40px; background: var(--navy-mid); position: relative; }
+        .contact::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), transparent);
+        }
+        .contact-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+        .contact h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 3vw, 38px); color: var(--cream); margin-bottom: 16px;
+        }
+        .contact-inner > p { color: var(--cream-dim); font-size: 16px; margin-bottom: 48px; }
+        .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: left; }
+        .contact-form .full-width { grid-column: 1 / -1; }
+        .contact-form label {
+            display: block; font-size: 11px; font-weight: 600;
+            letter-spacing: 1.5px; text-transform: uppercase;
+            color: var(--cream-dim); margin-bottom: 6px;
+        }
+        .contact-form input, .contact-form textarea, .contact-form select {
+            width: 100%; padding: 14px 16px;
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px; color: var(--cream); font-family: 'Inter', sans-serif;
+            font-size: 15px; transition: border-color 0.3s; outline: none;
+        }
+        .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus {
+            border-color: var(--gold);
+        }
+        .contact-form input::placeholder, .contact-form textarea::placeholder {
+            color: rgba(184,176,160,0.4);
+        }
+        .contact-form textarea { resize: vertical; min-height: 120px; }
+        .contact-form select option { background: var(--navy); color: var(--cream); }
+        .contact-submit {
+            grid-column: 1 / -1; padding: 16px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--navy); font-size: 14px; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            border: none; border-radius: 8px; cursor: pointer;
+            transition: all 0.3s; margin-top: 8px;
+        }
+        .contact-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.3); }
+        .contact-info {
+            display: flex; justify-content: center; gap: 48px;
+            margin-top: 48px; padding-top: 32px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .contact-info-item { text-align: center; }
+        .contact-info-item .label {
+            font-size: 10px; font-weight: 600; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--gold); margin-bottom: 4px;
+        }
+        .contact-info-item .value { font-size: 15px; color: var(--cream); }
+        .contact-info-item a { color: var(--cream); text-decoration: none; transition: color 0.3s; }
+        .contact-info-item a:hover { color: var(--gold); }
+
+        /* FOOTER */
+        footer {
+            padding: 40px; text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+        .footer-brand {
+            font-family: 'Playfair Display', serif; font-size: 14px;
+            font-weight: 700; color: var(--gold); letter-spacing: 3px; margin-bottom: 8px;
+        }
+        footer p { font-size: 12px; color: rgba(184,176,160,0.4); }
+        .footer-permits { font-size: 10px; color: rgba(184,176,160,0.25); margin-top: 8px; }
+
+        /* ANIMATIONS */
+        .fade-in {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .hero-logo { width: 160px; height: 160px; }
+            .story-grid { grid-template-columns: 1fr; gap: 40px; }
+            .story-image img { height: 300px; }
+            .contact-form { grid-template-columns: 1fr; }
+            .contact-info { flex-direction: column; gap: 20px; }
+            .categories-grid { grid-template-columns: 1fr 1fr; }
+            .photo-strip { grid-template-columns: 1fr; height: auto; }
+            .photo-strip .strip-img { height: 200px; }
+            .parallax-band { height: 300px; }
+            .parallax-band-bg { background-attachment: scroll; }
+        }
+        @media (max-width: 480px) {
+            .categories-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-brand">YBOR IMPORT CO.</a>
+            <ul class="nav-links">
+                <li><a href="#mission">Mission</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#story">Story</a></li>
+                <li><a href="#contact">Inquiries</a></li>
+                <li><a href="#" class="nav-portal">Client Portal</a></li>
+            </ul>
+            <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO — brick street background evokes Ybor City -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <img src="images/logo.png" alt="Ybor Import Co." class="hero-logo">
+            <h1>Ybor Import Co.</h1>
+            <p class="hero-tagline">Discovering the Undiscovered</p>
+            <p class="hero-sub">Tampa, Florida &nbsp;&bull;&nbsp; Importer &nbsp;&bull;&nbsp; Wholesaler</p>
+            <a href="#contact" class="hero-cta">Wholesale Inquiries</a>
+        </div>
+        <div class="scroll-hint"><span></span></div>
+    </section>
+
+    <!-- MISSION -->
+    <section class="mission fade-in" id="mission">
+        <p class="section-label">Our Mission</p>
+        <h2>We find <em>family-owned</em> producers who pour their soul into what they make &mdash; and bring their work to the world.</h2>
+        <p>
+            Ybor Import Co. exists to champion the small, the unknown, and the exceptional. We partner with family-owned and operated producers &mdash; the ones who care more about craft than scale, who've been perfecting recipes for generations, who deserve a stage bigger than their hometown.
+        </p>
+        <p>
+            Based in Tampa's historic Ybor City &mdash; a neighborhood built by immigrants who brought their traditions across the ocean &mdash; we carry that same spirit forward. We discover, we import, and we deliver.
+        </p>
+    </section>
+
+    <!-- PHOTO STRIP — three atmospheric images -->
+    <div class="photo-strip fade-in">
+        <img class="strip-img" src="https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?w=800&q=80" alt="Aged spirits barrels in cellar">
+        <img class="strip-img" src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=800&q=80" alt="Wine being poured at vineyard">
+        <img class="strip-img" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Artisan food preparation">
+    </div>
+
+    <!-- WHAT WE CARRY — image cards -->
+    <section class="categories" id="products">
+        <div class="categories-inner">
+            <div class="categories-header fade-in">
+                <p class="section-label">What We Carry</p>
+                <h2>Curated with Purpose</h2>
+                <p>Every product in our portfolio has a story, a family behind it, and a reason it's here.</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card fade-in">
+                    <img class="cat-img" src="https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=600&q=80" alt="Craft spirits distillery">
+                    <span class="cat-tag">Spirits</span>
+                    <div class="cat-overlay">
+                        <h3>Spirits</h3>
+                        <p>Rum, whiskey, mezcal &mdash; from distillers who do things the hard way because it tastes better.</p>
+                    </div>
+                </div>
+                <div class="category-card fade-in">
+                    <img class="cat-img" src="https://images.unsplash.com/photo-1474722883778-792e7990302f?w=600&q=80" alt="Vineyard rows at sunset">
+                    <span class="cat-tag">Wine</span>
+                    <div class="cat-overlay">
+                        <h3>Wine</h3>
+                        <p>Old-world vineyards, new-world pioneers. Small-lot bottles you won't find on every shelf.</p>
+                    </div>
+                </div>
+                <div class="category-card fade-in">
+                    <img class="cat-img" src="https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=600&q=80" alt="Craft beer taps">
+                    <span class="cat-tag">Beer</span>
+                    <div class="cat-overlay">
+                        <h3>Beer</h3>
+                        <p>Craft breweries and local legends. Fresh, local, and brewed with conviction.</p>
+                    </div>
+                </div>
+                <div class="category-card fade-in">
+                    <img class="cat-img" src="https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=600&q=80" alt="Fresh specialty provisions">
+                    <span class="cat-tag">Provisions</span>
+                    <div class="cat-overlay">
+                        <h3>Specialty Foods</h3>
+                        <p>Provisions, pantry goods, and ingredients that elevate every kitchen they enter.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARALLAX BAND -->
+    <div class="parallax-band">
+        <div class="parallax-band-bg" style="background-image: url('https://digitalcommons.usf.edu/gandy_street/2080/preview.jpg');"></div>
+        <div class="parallax-band-overlay"></div>
+        <div class="parallax-band-content">
+            <p class="section-label">Our Promise</p>
+            <h2>If they make something worth sharing, we'll get it to Florida.</h2>
+            <p>We don't work with big conglomerates. We work with people.</p>
+        </div>
+    </div>
+
+    <!-- THE STORY -->
+    <section class="story" id="story">
+        <div class="story-grid">
+            <div class="story-image fade-in">
+                <img src="https://digitalcommons.usf.edu/burgert/1045/preview.jpg" alt="Cigar Makers at Hav-a-Tampa Factory, 1927">
+                <div class="story-image-caption">Cigar makers at the Hav-a-Tampa factory, Ybor City, 1927 &mdash; Burgert Brothers / USF</div>
+            </div>
+            <div class="story-text fade-in">
+                <p class="section-label">Our Story</p>
+                <h2>Born in <span>Ybor City</span></h2>
+                <p>
+                    In the 1880s, immigrants from Cuba, Spain, Italy, and Germany built Ybor City from the ground up. They brought their skills, their recipes, and their refusal to settle for anything less than authentic.
+                </p>
+                <p>
+                    That's the energy we carry. Ybor Import Co. was founded to do what this neighborhood has always done &mdash; connect cultures through the things we eat and drink, one family producer at a time.
+                </p>
+                <div class="story-quote">
+                    <blockquote>
+                        &ldquo;We don't discover products. We discover people &mdash; and then we tell their story.&rdquo;
+                    </blockquote>
+                    <cite>&mdash; Ybor Import Co.</cite>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HISTORIC ARCHIVE GALLERY -->
+    <section class="archive-gallery">
+        <div class="archive-header fade-in">
+            <p class="section-label">From the Archives</p>
+            <h3>The Spirit of Ybor City</h3>
+            <p>Historic photographs from the Burgert Brothers, Gandy, and Gonzmart Family Collections</p>
+            <p style="margin-top: 8px;"><a href="https://digitalcommons.usf.edu/" target="_blank" rel="noopener">Browse the full USF Digital Commons archive &rarr;</a></p>
+        </div>
+        <div class="archive-scroll">
+            <div class="archive-card">
+                <img src="https://digitalcommons.usf.edu/burgert/1846/preview.jpg" alt="Ybor's Cigar Factory, 1887">
+                <div class="archive-card-info">
+                    <h4>Vicente Martinez Ybor's Cigar Factory</h4>
+                    <span>1887 &mdash; Burgert Brothers</span>
+                </div>
+            </div>
+            <div class="archive-card">
+                <img src="https://digitalcommons.usf.edu/burgert/1503/preview.jpg" alt="Seidenberg Cigar Factory, Ybor City">
+                <div class="archive-card-info">
+                    <h4>Seidenberg &amp; Co. Cigar Factory, 20th Street</h4>
+                    <span>1900 &mdash; Burgert Brothers</span>
+                </div>
+            </div>
+            <div class="archive-card">
+                <img src="https://digitalcommons.usf.edu/columbia/1368/preview.jpg" alt="Centro Asturiano Delegation in Tampa">
+                <div class="archive-card-info">
+                    <h4>Centro Asturiano De Habana Delegation</h4>
+                    <span>1903 &mdash; Gonzmart Collection</span>
+                </div>
+            </div>
+            <div class="archive-card">
+                <img src="https://digitalcommons.usf.edu/burgert/1044/preview.jpg" alt="7th Avenue, Ybor City">
+                <div class="archive-card-info">
+                    <h4>7th Avenue, Ybor City</h4>
+                    <span>1926 &mdash; Burgert Brothers</span>
+                </div>
+            </div>
+            <div class="archive-card">
+                <img src="https://digitalcommons.usf.edu/burgert/1297/preview.jpg" alt="Hav-A-Tampa Cigar Company Factory">
+                <div class="archive-card-info">
+                    <h4>Hav-A-Tampa Cigar Company Factory</h4>
+                    <span>1927 &mdash; Burgert Brothers</span>
+                </div>
+            </div>
+            <div class="archive-card">
+                <img src="https://digitalcommons.usf.edu/burgert/1045/preview.jpg" alt="Cigar Makers at Hav-a-Tampa">
+                <div class="archive-card-info">
+                    <h4>Cigar Makers at Hav-a-Tampa Factory</h4>
+                    <span>1927 &mdash; Burgert Brothers</span>
+                </div>
+            </div>
+            <div class="archive-card">
+                <img src="https://digitalcommons.usf.edu/burgert/1066/preview.jpg" alt="Cigar Makers and Lector at Cuesta Rey">
+                <div class="archive-card-info">
+                    <h4>Cigar Makers &amp; the Lector, Cuesta Rey</h4>
+                    <span>1929 &mdash; Burgert Brothers</span>
+                </div>
+            </div>
+            <div class="archive-card">
+                <img src="https://digitalcommons.usf.edu/columbia/1337/preview.jpg" alt="Kitchen at the Columbia Restaurant">
+                <div class="archive-card-info">
+                    <h4>Kitchen at the Columbia Restaurant</h4>
+                    <span>circa 1940s &mdash; Gonzmart Collection</span>
+                </div>
+            </div>
+            <div class="archive-card">
+                <img src="https://digitalcommons.usf.edu/burgert/1104/preview.jpg" alt="Corner of 7th Avenue and 15th Street">
+                <div class="archive-card-info">
+                    <h4>Corner of 7th Ave &amp; 15th Street</h4>
+                    <span>1947 &mdash; Burgert Brothers</span>
+                </div>
+            </div>
+            <div class="archive-card">
+                <img src="https://digitalcommons.usf.edu/gandy_street/2080/preview.jpg" alt="Columbia Restaurant Illuminated at Night">
+                <div class="archive-card-info">
+                    <h4>The Columbia Restaurant at Night</h4>
+                    <span>circa 1960 &mdash; Gandy Collection</span>
+                </div>
+            </div>
+            <div class="archive-card">
+                <img src="https://digitalcommons.usf.edu/columbia/1375/preview.jpg" alt="Columbia Cafe Outdoor Seating">
+                <div class="archive-card-info">
+                    <h4>The Columbia Cafe</h4>
+                    <span>1976 &mdash; Gonzmart Collection</span>
+                </div>
+            </div>
+            <div class="archive-card">
+                <img src="https://digitalcommons.usf.edu/columbia/1427/preview.jpg" alt="Old World Family in Pravia, Spain">
+                <div class="archive-card-info">
+                    <h4>Old World Family in Pravia, Spain</h4>
+                    <span>circa 1900 &mdash; Gonzmart Collection</span>
+                </div>
+            </div>
+            <div class="archive-card">
+                <img src="https://digitalcommons.usf.edu/columbia/1425/preview.jpg" alt="Pendas Y Alvarez Cigar Makers">
+                <div class="archive-card-info">
+                    <h4>Pendas Y Alvarez Cigar Makers</h4>
+                    <span>1910 &mdash; Gonzmart Collection</span>
+                </div>
+            </div>
+            <div class="archive-card">
+                <img src="https://digitalcommons.usf.edu/columbia/1315/preview.jpg" alt="Columbia Restaurant Facing 7th Avenue">
+                <div class="archive-card-info">
+                    <h4>Columbia Restaurant, 7th Avenue</h4>
+                    <span>circa 1980 &mdash; Gonzmart Collection</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+        <div class="contact-inner">
+            <p class="section-label">Get In Touch</p>
+            <h2>Wholesale Inquiries</h2>
+            <p>Whether you're a restaurant, bar, retailer, or distributor &mdash; if you value quality and the stories behind what you serve, let's talk.</p>
+
+            <form class="contact-form" action="https://formspree.io/f/placeholder" method="POST">
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your name" required>
+                </div>
+                <div>
+                    <label for="business">Business</label>
+                    <input type="text" id="business" name="business" placeholder="Business name">
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="you@business.com" required>
+                </div>
+                <div>
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone" placeholder="(813) 555-0000">
+                </div>
+                <div class="full-width">
+                    <label for="interest">I'm interested in</label>
+                    <select id="interest" name="interest">
+                        <option value="">Select a category...</option>
+                        <option value="spirits">Spirits</option>
+                        <option value="wine">Wine</option>
+                        <option value="beer">Beer / Craft</option>
+                        <option value="food">Specialty Foods</option>
+                        <option value="all">Full Portfolio</option>
+                    </select>
+                </div>
+                <div class="full-width">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Tell us about your business and what you're looking for..."></textarea>
+                </div>
+                <button type="submit" class="contact-submit">Send Inquiry</button>
+            </form>
+
+            <div class="contact-info">
+                <div class="contact-info-item">
+                    <div class="label">Email</div>
+                    <div class="value"><a href="mailto:info@yborimport.co">info@yborimport.co</a></div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="label">Location</div>
+                    <div class="value">Tampa, Florida</div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="label">Licensed</div>
+                    <div class="value">TTB Permitted Importer & Wholesaler</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-brand">YBOR IMPORT CO.</div>
+        <p>&copy; 2026 Ybor Import Co., LLC &mdash; Tampa, Florida</p>
+        <p class="footer-permits">TTB Basic Permit (Importer) &bull; TTB Basic Permit (Wholesaler) &bull; Florida Licensed</p>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+        });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Client Portal — Coming Soon
+        document.querySelector('.nav-portal').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Client Portal coming soon! Contact your Ybor Import Co. rep for access.');
+        });
+    </script>
+
+</body>
+</html>
