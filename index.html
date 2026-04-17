@@ -431,6 +431,19 @@
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
         /* RESPONSIVE */
+        .nav-links.show {
+            display: flex !important;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--navy-dark);
+            padding: 20px 40px 24px;
+            gap: 18px;
+            border-bottom: 1px solid rgba(201,168,76,0.2);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+        }
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .hamburger { display: flex; }
