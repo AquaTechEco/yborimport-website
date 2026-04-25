@@ -713,37 +713,37 @@
             <h2>Wholesale Inquiries</h2>
             <p>Whether you're a restaurant, bar, retailer, or distributor &mdash; if you value quality and the stories behind what you serve, let's talk.</p>
 
-            <form class="contact-form" action="https://formspree.io/f/placeholder" method="POST">
+            <form class="contact-form" id="inquiryForm" onsubmit="return sendInquiry(event)">
                 <div>
                     <label for="name">Name</label>
-                    <input type="text" id="name" name="name" placeholder="Your name" required>
+                    <input type="text" id="name" placeholder="Your name" required>
                 </div>
                 <div>
                     <label for="business">Business</label>
-                    <input type="text" id="business" name="business" placeholder="Business name">
+                    <input type="text" id="business" placeholder="Business name">
                 </div>
                 <div>
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="you@business.com" required>
+                    <input type="email" id="email" placeholder="you@business.com" required>
                 </div>
                 <div>
                     <label for="phone">Phone</label>
-                    <input type="tel" id="phone" name="phone" placeholder="(813) 555-0000">
+                    <input type="tel" id="phone" placeholder="(813) 555-0000">
                 </div>
                 <div class="full-width">
                     <label for="interest">I'm interested in</label>
-                    <select id="interest" name="interest">
+                    <select id="interest">
                         <option value="">Select a category...</option>
-                        <option value="spirits">Spirits</option>
-                        <option value="wine">Wine</option>
-                        <option value="beer">Beer / Craft</option>
-                        <option value="food">Specialty Foods</option>
-                        <option value="all">Full Portfolio</option>
+                        <option value="Spirits">Spirits</option>
+                        <option value="Wine">Wine</option>
+                        <option value="Beer / Craft">Beer / Craft</option>
+                        <option value="Specialty Foods">Specialty Foods</option>
+                        <option value="Full Portfolio">Full Portfolio</option>
                     </select>
                 </div>
                 <div class="full-width">
                     <label for="message">Message</label>
-                    <textarea id="message" name="message" placeholder="Tell us about your business and what you're looking for..."></textarea>
+                    <textarea id="message" placeholder="Tell us about your business and what you're looking for..."></textarea>
                 </div>
                 <button type="submit" class="contact-submit">Send Inquiry</button>
             </form>
@@ -786,6 +786,32 @@
             e.preventDefault();
             alert('Client Portal coming soon! Contact your Ybor Import Co. rep for access.');
         });
+
+        // Contact form — opens email client with pre-filled message
+        function sendInquiry(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const business = document.getElementById('business').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const interest = document.getElementById('interest').value;
+            const message = document.getElementById('message').value;
+
+            const subject = 'Wholesale Inquiry' + (business ? ' — ' + business : '');
+            const body = 'Name: ' + name +
+                '\nBusiness: ' + (business || 'N/A') +
+                '\nEmail: ' + email +
+                '\nPhone: ' + (phone || 'N/A') +
+                '\nInterested In: ' + (interest || 'N/A') +
+                '\n\n' + (message || 'I\'d like to learn more about your products.');
+
+            const mailtoLink = 'mailto:info@yborimport.co' +
+                '?subject=' + encodeURIComponent(subject) +
+                '&body=' + encodeURIComponent(body);
+
+            window.location.href = mailtoLink;
+            return false;
+        }
     </script>
 
 </body>
